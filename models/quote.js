@@ -1,10 +1,11 @@
-import mongoose, {Schema} from 'mongoose';
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-export default mongoose.model('Quote', new Schema({
+module.exports = mongoose.model('Quote', new Schema({
   data: {
     type: String,
     required: true
-  },{
-    timestamps: true
-  }
+  },
+},{
+  timestamps: true
 }));
