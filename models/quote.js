@@ -6,6 +6,13 @@ module.exports = mongoose.model('Quote', new Schema({
     type: String,
     required: true
   },
+  movie: {
+    type: String,
+    required: true
+  },
+  series: {
+    type: String,
+  }
 },{
   timestamps: true
 }));

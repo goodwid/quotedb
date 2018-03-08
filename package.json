@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "babel-node --presets babel-preset-env",
-    "start:watch": "nodemon src/app.js --exec babel-node --presets babel-preset-env",
+    "start": "babel-node --presets babel-preset-env index.js",
+    "start:watch": "nodemon index.js --exec babel-node --presets babel-preset-env",
     "test": "mocha --recursive",
     "test:watch": "mocha --recursive -w",
     "test:int": "mocha test/integration",

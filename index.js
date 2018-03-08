@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import ('./lib/setup-mongoose');
+import './lib/setup-mongoose';
 import app from './lib/app';
 const port = process.env.PORT || process.argv[2] || 9000;
 
