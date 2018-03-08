@@ -10,7 +10,6 @@ router
       .find({movie: movie})
       .lean()
       .then(quotes => {
-        console.log('from random: ', quotes);
         let numQuotes = quotes.length;
         if (numQuotes === 0) next(std404ErrMsg);
         if (quotes.length === 1) 
@@ -24,6 +23,5 @@ router
         msg: 'No quotes found',
       }));
   });
-
 
 export default router;
