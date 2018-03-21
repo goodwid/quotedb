@@ -19,7 +19,23 @@ router
       .catch(err => next({
         code: 404,
         error: err,
-        msg: 'No quotes found',
+        msg: 'No quotes found'
+      }));
+  })
+  // Retrieve a single quote by id
+  .get('/:id', (req, res, next) => {
+    let id = req.params.id;
+    Quote
+      .findById(id)
+      .lean()
+      .then(quote => {
+        if (quote) res.json(quote);
+        else next(std404ErrMsg);
+      })
+      .catch(err => next({
+        code: 404,
+        error: err,
+        msg: 'No quote found'
       }));
   })
   // Create a Quote

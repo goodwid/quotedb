@@ -12,8 +12,7 @@ router
       .then(quotes => {
         let numQuotes = quotes.length;
         if (numQuotes === 0) next(std404ErrMsg);
-        if (quotes.length === 1) 
-          return res.send(quotes[0]);
+        if (numQuotes === 1) return res.send(quotes[0]);
         let randomQuote = Math.floor(Math.random() * numQuotes);
         res.send(quotes[randomQuote]);
       })
