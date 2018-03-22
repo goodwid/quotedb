@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import std404ErrMsg from '../lib/404';
 import hasRole from '../lib/hasRole';
 import Quote from '../models/quote';
+import isAuth from '../lib/isAuth';
 const router = express.Router(); // eslint-disable-line
 const jsonParser = bodyParser.json();
 
@@ -39,7 +40,7 @@ router
       }));
   })
   // Create a Quote
-  .post('/', jsonParser, (req, res, next) => {
+  .post('/', jsonParser, isAuth, (req, res, next) => {
     new Quote(req.body)
       .save()
       .then(quote => {
@@ -55,7 +56,7 @@ router
       });
   })
   // Update/change a specific Quote
-  .put('/:id', jsonParser, (req, res, next) => {
+  .put('/:id', jsonParser, isAuth, hasRole('admin'), (req, res, next) => {
     Quote
       .findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -74,7 +75,7 @@ router
       });
   })
   // Remove a Quote
-  .delete('/:id', (req, res, next) => {
+  .delete('/:id', isAuth, hasRole('admin'), (req, res, next) => {
     Quote
       .findByIdAndRemove(req.params.id)
       .then(removedQuote => {

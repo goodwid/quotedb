@@ -20,12 +20,12 @@ const promises = [];
 const quotes = inputFile.split('\n');
 quotes.forEach(quote => {
   const data = quote.split('¶').join('\n');
-  promises.push(new Quote({data, movie}).save())
+  promises.push(new Quote({data, movie}).save());
 });
 
 Promise.all(promises)
   .then(results => {
-    results.forEach(el => console.log(`quote added: ${el._id}`))
+    results.forEach(el => console.log(`quote added: ${el._id}`));
     process.exit(0);
   })
   .catch(err => console.error(err));

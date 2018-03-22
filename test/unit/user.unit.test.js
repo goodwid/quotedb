@@ -1,5 +1,5 @@
-const User = require('../../models/user');
-const mongoose = require('mongoose');
+import User from '../../models/user';
+import mongoose from 'mongoose';
 
 describe('User model', () => {
   it('requires name', done => {
@@ -12,8 +12,8 @@ describe('User model', () => {
   it('validates with required fields', done => {
     const user = new User({username: 'fred', password: 'test'});
     user.validate()
-    .then(done)
-    .catch(done);
+      .then(done)
+      .catch(done);
   });
 
   after('remove mongoose model', () => {

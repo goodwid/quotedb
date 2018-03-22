@@ -1,5 +1,5 @@
-const Quote = require('../../models/quote');
-const mongoose = require('mongoose');
+import Quote from '../../models/quote';
+import mongoose from 'mongoose';
 
 describe('Quote model', () => {
   it('requires data', done => {
@@ -10,7 +10,7 @@ describe('Quote model', () => {
   });
 
   it('validates with required fields', done => {
-    const quote = new Quote({data: 'This is a quote'});
+    const quote = new Quote({data: 'This is a quote', movie: 'movie'});
     quote.validate()
       .then(done)
       .catch(done);

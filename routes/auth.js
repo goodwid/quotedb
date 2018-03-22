@@ -1,10 +1,12 @@
-const router = require('express').Router();
-const bodyParser = require('body-parser').json();
-const User = require('../models/user');
-const token = require('../lib/token');
+import express from 'express';
+const router = express.Router();
+import bodyParser from 'body-parser';
+const jsonParser = bodyParser.json()
+import User from '../models/user';
+import token from '../lib/token';
 
 router
-  .post('/signup', bodyParser, (req, res) => {
+  .post('/signup', jsonParser, (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     delete req.body.password;
@@ -16,7 +18,7 @@ router
     }
 
     User.findOne({username})
-      .then( exists => {
+      .then(exists => {
         if (exists) {
           return res.status(500).json({
             msg: 'Unable to create username',
@@ -38,7 +40,7 @@ router
       });
   })
 
-  .post('/signin', bodyParser, (req, res) => {
+  .post('/signin', jsonParser, (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     delete req.body;
