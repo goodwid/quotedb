@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,./data --copy-files",
     "start":"node dist",
-    "heroku-postbuild":"npm i babel-cli && npm run build",
+    "heroku-postbuild":"npm run build",
     "start:watch": "export NODE_ENV=dev; nodemon index.js --exec babel-node --presets babel-preset-env",
     "test": "export TEST=true; mocha --recursive --require babel-register --exit",
     "test:watch": "export TEST=true; mocha --recursive --require babel-register -w --exit",
