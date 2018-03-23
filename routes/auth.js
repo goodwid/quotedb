@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import bodyParser from 'body-parser';
-const jsonParser = bodyParser.json()
+const jsonParser = bodyParser.json();
 import User from '../models/user';
 import token from '../lib/token';
 
