@@ -2,5 +2,11 @@ language:
   - node_js
 node_js:
   - 9
-services:
-  - mongodb
+
+addons:
+  apt:
+    sources:
+      - mongodb-3.4-trusty
+
+    packages:
+      - mongodb-org-server
