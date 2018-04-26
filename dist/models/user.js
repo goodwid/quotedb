@@ -8,9 +8,9 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _bcrypt = require('bcrypt');
+var _bcryptjs = require('bcryptjs');
 
-var _bcrypt2 = _interopRequireDefault(_bcrypt);
+var _bcryptjs2 = _interopRequireDefault(_bcryptjs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,12 +40,12 @@ var userSchema = new Schema({
 });
 
 userSchema.methods.generateHash = function generateHash(password) {
-  this.password = _bcrypt2.default.hashSync(password, 8);
+  this.password = _bcryptjs2.default.hashSync(password, 8);
   return this.password;
 };
 
 userSchema.methods.compareHash = function generateHash(password) {
-  return _bcrypt2.default.compareSync(password, this.password);
+  return _bcryptjs2.default.compareSync(password, this.password);
 };
 
 var User = _mongoose2.default.model('User', userSchema);

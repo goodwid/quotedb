@@ -13,6 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // const mongoose = require('mongoose');
 
 var dbURI = process.env.TEST ? 'mongodb://localhost/quotedb' : process.env.MONGO_URI;
+// const dbURI = process.env.MONGO_URI;
 
 _mongoose2.default.Promise = Promise;
 _mongoose2.default.connect(dbURI);
