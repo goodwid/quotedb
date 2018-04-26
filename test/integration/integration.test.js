@@ -29,7 +29,7 @@ const testUser2 = {
 
 const mockQuote = {
   data: 'This is a test quote',
-  movie: 'Test Movie',
+  movie: 'Test',
   series: 'Tests'
 };
 
@@ -49,15 +49,14 @@ describe('integration', function () {
         });
     });
 
-    before('get token for testAdmin', function (done) { 
+    before('get token for testAdmin', function () { 
       this.timeout(10000);
-      request
+      return request
         .post(`${API_URL}/signin`)
         .send(testAdmin)
-        .end((err, res) => {
+        .then((err, res) => {
           const result = JSON.parse(res.text);
           testAdmin.token = result.token;
-          done();
         });
     });
 
@@ -153,6 +152,18 @@ describe('integration', function () {
           assert.propertyVal(result, '_id', mockQuote.id);
           assert.propertyVal(result, 'data', mockQuote.data); 
           done();
+        });
+    });
+
+    it(`GET to ${API_URL}/quotes/random/Test gets a valid record`, (done) => {
+      request
+        .get(`${API_URL}/movies/random/Test`)
+        .end((err, res) => {
+          const result = JSON.parse(res.text);
+          assert.isObject(result);
+          assert.propertyVal(result, '_id', mockQuote.id);
+          assert.propertyVal(result, 'data', mockQuote.data);
+          done(); 
         });
     });
 

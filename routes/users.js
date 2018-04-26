@@ -1,10 +1,8 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import hasRole from '../lib/hasRole';
 import User from '../models/user';
 
 const router = express.Router(); // eslint-disable-line
-const jsonParser = bodyParser.json();
 
 router
   // Retrieve all Users
@@ -38,7 +36,7 @@ router
       });
   })
   // Create a User
-  .post('/', jsonParser, (req, res, next) => {
+  .post('/', (req, res, next) => {
     new User(req.body)
       .save()
       .then(user => {
@@ -78,7 +76,7 @@ router
       });
   })
   // Update/change a specific User
-  .put('/:id', jsonParser, (req, res, next) => {
+  .put('/:id', (req, res, next) => {
     User
       .findByIdAndUpdate(req.params.id, req.body, {
         new: true,

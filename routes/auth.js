@@ -1,26 +1,20 @@
 import express from 'express';
 const router = express.Router();
-import bodyParser from 'body-parser';
-const jsonParser = bodyParser.json();
 import User from '../models/user';
 import token from '../lib/token';
 
 router
-  .post('/signup', jsonParser, (req, res) => {
+  .post('/signup',  (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
     delete req.body.password;
 
-    if (!password) {
-      return res.status(400).json({
-        msg: 'No password entered. Please enter a password!'
-      });
-    }
+    if (!password) next({code: 400, msg: 'No password entered. Please enter a password!'});
 
     User.findOne({username})
       .then(exists => {
         if (exists) {
-          return res.status(500).json({
+          next({
             msg: 'Unable to create username',
             reason: 'Username already exists.  Please choose another.'
           });
@@ -32,36 +26,22 @@ router
           .then(user => token.sign(user))
           .then(token => res.json({token, id: user._id})); // nested .then on purpose to preserve user status.
       })
-      .catch(err => {
-        res.status(500).json({
-          msg: 'Unable to create a user',
-          reason: err
-        });
-      });
+      .catch(err => next({err, msg: 'Unable to create a user'}));
   })
 
-  .post('/signin', jsonParser, (req, res) => {
+  .post('/signin', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
     delete req.body;
 
     User.findOne({username})
       .then(user => {
-        if (!user || !user.compareHash(password)) {
-          return res.status(400).json({
-            msg: 'Authentication failed.'
-          });
-        }
+        if (!user || !user.compareHash(password)) next({msg: 'Authentication Failed.'});
 
         token.sign(user)
           .then(token => res.json({token, id: user._id}));
       })
-      .catch(err => {
-        res.status(500).json({
-          msg: 'Authentication Failed',
-          reason: err
-        });
-      });
+      .catch(err => next({err, msg: 'Authentication Failed.'}));
   });
 
 module.exports = router;

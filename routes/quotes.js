@@ -5,7 +5,7 @@ import hasRole from '../lib/hasRole';
 import Quote from '../models/quote';
 import isAuth from '../lib/isAuth';
 const router = express.Router(); // eslint-disable-line
-const jsonParser = bodyParser.json();
+// const jsonParser = bodyParser.json();
 
 router
   // Retrieve all Quotes
@@ -40,7 +40,7 @@ router
       }));
   })
   // Create a Quote
-  .post('/', jsonParser, isAuth, (req, res, next) => {
+  .post('/', isAuth, (req, res, next) => {
     new Quote(req.body)
       .save()
       .then(quote => {
@@ -56,7 +56,7 @@ router
       });
   })
   // Update/change a specific Quote
-  .put('/:id', jsonParser, isAuth, hasRole('admin'), (req, res, next) => {
+  .put('/:id', isAuth, hasRole('admin'), (req, res, next) => {
     Quote
       .findByIdAndUpdate(req.params.id, req.body, {
         new: true,
