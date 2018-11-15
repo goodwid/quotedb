@@ -69,3 +69,5 @@ tags
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 *.egt
+
+package-lock.json
