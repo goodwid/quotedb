@@ -80,7 +80,7 @@ router
   // Update/change a specific User
   .put('/:id', jsonParser, (req, res, next) => {
     User
-      .findByIdAndUpdate(req.params.id, req.body, {
+      .findOneAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
       })
@@ -98,7 +98,7 @@ router
   // Remove a User
   .delete('/:id', (req, res, next) => {
     User
-      .findByIdAndRemove(req.params.id)
+      .findOneAndDelete(req.params.id)
       .then(removedUser => {
         if (removedUser) res.json(removedUser);
       })

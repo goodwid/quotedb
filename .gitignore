@@ -70,4 +70,4 @@ tags
 !.elasticbeanstalk/*.global.yml
 *.egt
 
-package-lock.json
+.env

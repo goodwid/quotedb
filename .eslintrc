@@ -23,6 +23,8 @@
     "superagent": false,
     "Handlebars": false
   },
-  "extends": "eslint:recommended",
-  "parser": "babel-eslint"
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": "eslint:recommended"
 }

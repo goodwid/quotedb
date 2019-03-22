@@ -1,9 +1,8 @@
 #!/usr/bin/env node
+const dotenv = require('dotenv');
+dotenv.config();
 
-import './lib/setup-mongoose';
-import app from './lib/app';
-const port = process.env.PORT || process.argv[2] || 9000;
+require = require('esm')(module /*, options*/);
 
-app.listen(port, () => {
-  console.log(`server listening on port ${port}`);
-});
+require('./server');
+

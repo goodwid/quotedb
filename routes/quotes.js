@@ -58,7 +58,7 @@ router
   // Update/change a specific Quote
   .put('/:id', jsonParser, isAuth, hasRole('admin'), (req, res, next) => {
     Quote
-      .findByIdAndUpdate(req.params.id, req.body, {
+      .findOneAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
       })
@@ -77,7 +77,7 @@ router
   // Remove a Quote
   .delete('/:id', isAuth, hasRole('admin'), (req, res, next) => {
     Quote
-      .findByIdAndRemove(req.params.id)
+      .findOneAndDelete(req.params.id)
       .then(removedQuote => {
         if (removedQuote) res.json(removedQuote);
         else next(std404ErrMsg);
