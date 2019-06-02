@@ -14,7 +14,7 @@
     "test:unit": "export TEST=true; yarn run:test test/unit --exit",
     "test:unit:watch": "export TEST=true; yarn run:test -w test/unit --exit",
     "pretest": "yarn run lint",
-    "lint": "eslint **/*.js"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -40,9 +40,9 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "chai-http": "^3.0.0",
-    "eslint": "^4.19.1",
-    "mocha": "^5.2.0",
+    "chai-http": "^4.2.1",
+    "eslint": "^5.15.3",
+    "mocha": "^6.0.2",
     "nodemon": "^1.18.6"
   }
 }

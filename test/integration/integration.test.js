@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 const API_URL = '/api/quotedb/v1';
 
 const assert = chai.assert;
-const request = chai.request(app);
+const request = chai.request(app).keepOpen();
 
 const testAdmin = {
   username: 'testAdmin',

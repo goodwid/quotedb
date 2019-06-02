@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
@@ -35,68 +35,68 @@ var jsonParser = _bodyParser2.default.json();
 
 router
 // Retrieve all Quotes
-.get('/', function (req, res, next) {
-  _quote2.default.find({}).lean().then(function (quotes) {
-    if (quotes) res.json(quotes);else next(_2.default);
-  }).catch(function (err) {
-    return next({
-      code: 404,
-      error: err,
-      msg: 'No quotes found'
+  .get('/', function (req, res, next) {
+    _quote2.default.find({}).lean().then(function (quotes) {
+      if (quotes) res.json(quotes);else next(_2.default);
+    }).catch(function (err) {
+      return next({
+        code: 404,
+        error: err,
+        msg: 'No quotes found'
+      });
     });
-  });
-})
+  })
 // Retrieve a single quote by id
-.get('/:id', function (req, res, next) {
-  var id = req.params.id;
-  _quote2.default.findById(id).lean().then(function (quote) {
-    if (quote) res.json(quote);else next(_2.default);
-  }).catch(function (err) {
-    return next({
-      code: 404,
-      error: err,
-      msg: 'No quote found'
+  .get('/:id', function (req, res, next) {
+    var id = req.params.id;
+    _quote2.default.findById(id).lean().then(function (quote) {
+      if (quote) res.json(quote);else next(_2.default);
+    }).catch(function (err) {
+      return next({
+        code: 404,
+        error: err,
+        msg: 'No quote found'
+      });
     });
-  });
-})
+  })
 // Create a Quote
-.post('/', jsonParser, _isAuth2.default, function (req, res, next) {
-  new _quote2.default(req.body).save().then(function (quote) {
-    if (quote) res.json(quote);else next(_2.default);
-  }).catch(function (err) {
-    next({
-      code: 500,
-      error: err,
-      msg: 'Unable to create quote'
+  .post('/', jsonParser, _isAuth2.default, function (req, res, next) {
+    new _quote2.default(req.body).save().then(function (quote) {
+      if (quote) res.json(quote);else next(_2.default);
+    }).catch(function (err) {
+      next({
+        code: 500,
+        error: err,
+        msg: 'Unable to create quote'
+      });
     });
-  });
-})
+  })
 // Update/change a specific Quote
-.put('/:id', jsonParser, _isAuth2.default, (0, _hasRole2.default)('admin'), function (req, res, next) {
-  _quote2.default.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  }).then(function (updatedQuote) {
-    if (updatedQuote) res.json(updatedQuote);else next(_2.default);
-  }).catch(function (err) {
-    next({
-      code: 500,
-      msg: 'Unable to modify quote',
-      error: err
+  .put('/:id', jsonParser, _isAuth2.default, (0, _hasRole2.default)('admin'), function (req, res, next) {
+    _quote2.default.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    }).then(function (updatedQuote) {
+      if (updatedQuote) res.json(updatedQuote);else next(_2.default);
+    }).catch(function (err) {
+      next({
+        code: 500,
+        msg: 'Unable to modify quote',
+        error: err
+      });
     });
-  });
-})
+  })
 // Remove a Quote
-.delete('/:id', _isAuth2.default, (0, _hasRole2.default)('admin'), function (req, res, next) {
-  _quote2.default.findByIdAndRemove(req.params.id).then(function (removedQuote) {
-    if (removedQuote) res.json(removedQuote);else next(_2.default);
-  }).catch(function (err) {
-    next({
-      code: 500,
-      error: err,
-      msg: 'Unable to remove quote'
+  .delete('/:id', _isAuth2.default, (0, _hasRole2.default)('admin'), function (req, res, next) {
+    _quote2.default.findByIdAndRemove(req.params.id).then(function (removedQuote) {
+      if (removedQuote) res.json(removedQuote);else next(_2.default);
+    }).catch(function (err) {
+      next({
+        code: 500,
+        error: err,
+        msg: 'Unable to remove quote'
+      });
     });
   });
-});
 
 exports.default = router;
